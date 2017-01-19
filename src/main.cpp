@@ -1,5 +1,9 @@
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#define GLEW_STATIC
+#include <GL/glew.h>
+#else
 #define GLFW_INCLUDE_GLCOREARB
-
+#endif
 #include <iostream>
 #include <GLFW/glfw3.h>
 
@@ -29,7 +33,7 @@ void setupWindow() {
     // init glfw
 	if (!glfwInit()) {
 		std::cout << "GLFW init failed!" << std::endl;
-    	exit(EXIT_FAILURE);
+    	// exit(EXIT_FAILURE);
 	}
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -42,7 +46,7 @@ void setupWindow() {
     {
         glfwTerminate();
         std::cout << "GLFW creation of window failed!" << std::endl;
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE);
     }
     glfwMakeContextCurrent(window);
     // glfwSetWindowUserPointer(window, this);
